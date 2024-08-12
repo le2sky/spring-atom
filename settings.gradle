@@ -1,1 +1,3 @@
 rootProject.name = 'spring-atom'
+include 'spring-admin-api'
+include 'spring-admin-core'

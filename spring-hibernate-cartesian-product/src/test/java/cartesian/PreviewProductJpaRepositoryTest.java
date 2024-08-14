@@ -22,7 +22,7 @@ class PreviewProductJpaRepositoryTest {
     @DisplayName("중복 카테고리를 조회한다.")
     void categoryDuplication() {
         initData();
-
+        // 이 경우 n + 1은 발생하지 않지만, category 중복이 발생한다.
         List<PreviewProduct> result = previewProductJpaRepository.findAllPreviewProduct();
     }
 

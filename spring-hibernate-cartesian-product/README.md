@@ -5,7 +5,8 @@
 3. 따라서 Product의 수 * Category의 수 만큼 Category가 중복 생성되지 않았나 싶은 가설 -> 어떻게 증명할지는 감이 잡히지 않는다.
 4. 당장은 Category의 수가 중복되니 @OneToMany 자료구조를 Set으로 설정했다.
 5. 성공적으로 동작하는 것처럼 보였지만 Category가 정렬이 안된채로 내려진다.
-6. @OrderBy를 OneToMany에 설정해주면 정렬이 된다.
+6. @OrderBy를 OneToMany에 설정해주면 정렬이 된다. (v1)
+7. 
 
 #### 고민
 

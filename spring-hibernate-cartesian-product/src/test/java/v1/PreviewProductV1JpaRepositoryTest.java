@@ -19,34 +19,34 @@ class PreviewProductV1JpaRepositoryTest {
     private PreviewProductV1JpaRepository previewProductV1JpaRepository;
 
     @Test
-    @DisplayName("중복 카테고리를 조회한다.")
+    @DisplayName("중복되지 않은 카테고리를 조회한다.")
     void categoryDuplication() {
         initData();
         // 이 경우 n + 1은 발생하지 않고, 중복 카테고리가 생기지 않는다.
-        List<v1.PreviewProduct> result = previewProductV1JpaRepository.findAllPreviewProduct();
+        List<PreviewProduct> result = previewProductV1JpaRepository.findAllPreviewProduct();
     }
 
     private void initData() {
-        v1.Category a = new v1.Category(null, "A");
-        v1.Category b = new v1.Category(null, "B");
-        v1.Category c = new v1.Category(null, "C");
-        v1.Category d = new v1.Category(null, "D");
-        v1.Category e = new v1.Category(null, "E");
+        Category a = new Category(null, "A");
+        Category b = new Category(null, "B");
+        Category c = new Category(null, "C");
+        Category d = new Category(null, "D");
+        Category e = new Category(null, "E");
         em.persist(a);
         em.persist(b);
         em.persist(c);
         em.persist(d);
         em.persist(e);
 
-        v1.Product product1 = new v1.Product(null, List.of(a, b, c, d, e));
-        v1.Product product2 = new v1.Product(null, List.of(a, b, c, d, e));
+        Product product1 = new Product(null, List.of(a, b, c, d, e));
+        Product product2 = new Product(null, List.of(a, b, c, d, e));
         em.persist(product1);
         em.persist(product2);
 
-        v1.PreviewProduct previewProduct1 = new v1.PreviewProduct(null, product1);
-        v1.PreviewProduct previewProduct2 = new v1.PreviewProduct(null, product1);
-        v1.PreviewProduct previewProduct3 = new v1.PreviewProduct(null, product2);
-        v1.PreviewProduct previewProduct4 = new v1.PreviewProduct(null, product2);
+        PreviewProduct previewProduct1 = new PreviewProduct(null, product1);
+        PreviewProduct previewProduct2 = new PreviewProduct(null, product1);
+        PreviewProduct previewProduct3 = new PreviewProduct(null, product2);
+        PreviewProduct previewProduct4 = new PreviewProduct(null, product2);
         em.persist(previewProduct1);
         em.persist(previewProduct2);
         em.persist(previewProduct3);

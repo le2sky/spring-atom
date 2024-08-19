@@ -7,11 +7,12 @@ spring:
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate
     properties:
       hibernate:
         auto_quote_keyword: true
         format_sql: true
-        ddl-auto: validate
   flyway:
     enabled: true
     baseline-on-migrate: true

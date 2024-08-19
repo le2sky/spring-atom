@@ -1,0 +1,8 @@
+- Flyway는 오픈소스 DB 마이그레이션 및 DB 스키마 형상관리를 위한 도구다.
+- 운영 환경에서는 spring.jpa.hibernate.ddl-auto 옵션을 create, update로 할 수 없다.
+- 따라서 DB 스키마에 변경이 생긴다면 직접 DB 서버에 접속해서 수정해야 한다.
+    - 오타, 명령어 누락 등 휴먼에러 가능성
+- DB 형상관리 도구를 활용하면 쉽고 안전하게 변경사항을 반영 가능하다.
+- 스키마 버전 관리가 되기 때문에 어떤 변경사항이 있었는지 한눈에 볼 수 있다는 장점이 있다.
+- 다만, 마이그레이션 충돌이 발생할 수 있는 것으로 보인다. [Flyway에 대한 경험과 교훈](https://moon-seung-chan.tistory.com/63)
+- 엔지니어에게 DB에 관련된 여러 권한을 줘야하는 것으로 보인다.[Flyway 가이드](https://steady-coding.tistory.com/632)

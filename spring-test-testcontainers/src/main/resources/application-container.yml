@@ -1,4 +1,9 @@
 spring:
+  datasource:
+    url: jdbc:tc:mysql:8://test
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+    username: user
+    password: password
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:

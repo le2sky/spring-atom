@@ -18,7 +18,8 @@ abstract class TestContainerSupport {
 
     @DynamicPropertySource
     static void dynamicProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", container::getJdbcUrl);
+        String url = container.getJdbcUrl() + "?characterEncoding=UTF-8&serverTimezone=UTC&rewriteBatchedStatements=true&profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=1000";
+        registry.add("spring.datasource.url", () -> url);
         registry.add("spring.datasource.username", () -> "root");
         registry.add("spring.datasource.password", () -> "test");
     }

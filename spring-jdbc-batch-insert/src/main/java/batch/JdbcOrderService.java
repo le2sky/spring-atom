@@ -17,26 +17,60 @@ class JdbcOrderService {
 
     @Transactional
     public void createOrder(List<OrderRequest> requests) {
-        String sql = "insert into orders (address) values (?)";
+        // order batch insert
+        String orderInsertSql = "insert into orders (address) values (?)";
+        jdbcTemplate.batchUpdate(orderInsertSql, createOrderPss(requests));
 
-        jdbcTemplate.batchUpdate(
-                sql,
-                new BatchPreparedStatementSetter() {
+        // batch insert 첫 번째 row pk 조회
+        Long firstRowPk = jdbcTemplate.queryForObject("select last_insert_id()", Long.class);
 
-                    @Override
-                    public void setValues(
-                            PreparedStatement ps,
-                            int i
-                    ) throws SQLException {
-                        OrderRequest orderRequest = requests.get(i);
-                        ps.setString(1, orderRequest.address());
-                    }
+        // orderId 매핑
+        for (int i = 0; i < requests.size(); i++) {
+            OrderRequest orderRequest = requests.get(i);
+            orderRequest.setId(firstRowPk + i);
+        }
 
-                    @Override
-                    public int getBatchSize() {
-                        return requests.size();
-                    }
-                }
-        );
+        // insert할 orderLineItemRequest 생성
+        List<OrderLineItemRequest> orderLineItemRequests = requests.stream()
+                .flatMap(it -> it.getOrderLineItemRequestsWithPk().stream())
+                .toList();
+
+        // item batch insert
+        String itemInsertSql = "insert into order_line_item (product_id, quantity, order_id) values (?, ?, ?)";
+        jdbcTemplate.batchUpdate(itemInsertSql, createItemPss(orderLineItemRequests));
+    }
+
+    private BatchPreparedStatementSetter createOrderPss(List<OrderRequest> requests) {
+        return new BatchPreparedStatementSetter() {
+
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                OrderRequest orderRequest = requests.get(i);
+                ps.setString(1, orderRequest.getAddress());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return requests.size();
+            }
+        };
+    }
+
+    private BatchPreparedStatementSetter createItemPss(List<OrderLineItemRequest> requests) {
+        return new BatchPreparedStatementSetter() {
+
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                OrderLineItemRequest orderLineItemRequest = requests.get(i);
+                ps.setLong(1, orderLineItemRequest.getProductId());
+                ps.setLong(2, orderLineItemRequest.getQuantity());
+                ps.setLong(3, orderLineItemRequest.getOrderId());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return requests.size();
+            }
+        };
     }
 }

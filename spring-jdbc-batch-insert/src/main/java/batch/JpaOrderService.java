@@ -21,10 +21,10 @@ class JpaOrderService {
     }
 
     private Order mapToOrder(OrderRequest orderRequest) {
-        Order order = new Order(orderRequest.address());
-        List<OrderLineItemRequest> lineItemRequests = orderRequest.orderLineItemRequests();
+        Order order = new Order(orderRequest.getAddress());
+        List<OrderLineItemRequest> lineItemRequests = orderRequest.getOrderLineItemRequests();
         lineItemRequests.forEach(item -> {
-            OrderLineItem orderLineItem = new OrderLineItem(item.productId(), item.quantity(), order);
+            OrderLineItem orderLineItem = new OrderLineItem(item.getProductId(), item.getQuantity(), order);
             order.addItem(orderLineItem);
         });
 

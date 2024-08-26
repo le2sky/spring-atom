@@ -13,6 +13,8 @@ spring:
 logging:
   level:
     org:
+      springframework:
+        jdbc: debug
       hibernate:
         SQL: DEBUG
         type:

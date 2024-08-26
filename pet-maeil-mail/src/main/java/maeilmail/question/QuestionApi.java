@@ -1,4 +1,4 @@
-package maeilmail;
+package maeilmail.question;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

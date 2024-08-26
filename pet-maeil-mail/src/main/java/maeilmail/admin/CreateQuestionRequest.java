@@ -1,4 +1,7 @@
-package maeilmail;
+package maeilmail.admin;
+
+import maeilmail.question.Question;
+import maeilmail.question.QuestionCategory;
 
 record CreateQuestionRequest(String title, String content, String category) {
 

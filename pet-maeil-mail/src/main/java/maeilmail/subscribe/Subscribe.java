@@ -1,4 +1,4 @@
-package maeilmail;
+package maeilmail.subscribe;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,30 +11,26 @@ import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import maeilmail.question.QuestionCategory;
 
 @Entity
 @Getter
-@Table(name = "question")
+@Table(name = "subscribe")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-class Question {
+class Subscribe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String title;
-
-
-    @Column(nullable = false)
-    private String content;
+    private String email;
 
     @Enumerated(EnumType.STRING)
-    private QuestionCategory category;
+    private QuestionCategory questionCategory;
 
-    public Question(String title, String content, QuestionCategory category) {
-        this.title = title;
-        this.content = content;
-        this.category = category;
+    public Subscribe(String email, QuestionCategory questionCategory) {
+        this.email = email;
+        this.questionCategory = questionCategory;
     }
 }

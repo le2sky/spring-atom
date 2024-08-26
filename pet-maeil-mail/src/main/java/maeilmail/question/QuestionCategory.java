@@ -1,9 +1,9 @@
-package maeilmail;
+package maeilmail.question;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-enum QuestionCategory {
+public enum QuestionCategory {
 
     FRONTEND, BACKEND;
 

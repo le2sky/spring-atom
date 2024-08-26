@@ -31,4 +31,10 @@ class Question {
 
     @Enumerated(EnumType.STRING)
     private QuestionCategory category;
+
+    public Question(String title, String content, QuestionCategory category) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+    }
 }

@@ -1,5 +1,6 @@
 package maeilmail.question;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,4 +18,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             where q.id = :id
              """)
     Optional<QuestionSummary> findOneById(Long id);
+
+    List<Question> findAllByCategory(QuestionCategory category);
 }

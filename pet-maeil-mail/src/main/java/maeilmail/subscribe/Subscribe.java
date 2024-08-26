@@ -27,10 +27,10 @@ class Subscribe {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    private QuestionCategory questionCategory;
+    private QuestionCategory category;
 
-    public Subscribe(String email, QuestionCategory questionCategory) {
+    public Subscribe(String email, QuestionCategory category) {
         this.email = email;
-        this.questionCategory = questionCategory;
+        this.category = category;
     }
 }

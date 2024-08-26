@@ -17,7 +17,7 @@ class JpaOrderServiceTest extends TestContainerSupport {
     private JpaOrderService jpaOrderService;
 
     @Test
-    @DisplayName("jpa로 order 데이터 10만개를 저장한다. (orderLineItem 미포함)")
+    @DisplayName("jpa로 order 데이터 1만개를 저장한다. (orderLineItem 미포함)")
     void createWithOutItem() {
         List<OrderRequest> orderRequests = OrderRequestGenerator.generateRequestsWithoutItem();
 
@@ -25,7 +25,7 @@ class JpaOrderServiceTest extends TestContainerSupport {
     }
 
     @Test
-    @DisplayName("jpa로 order 데이터 10만개를 저장한다. (orderLineItem 포함)")
+    @DisplayName("jpa로 order 데이터 1만개를 저장한다. (orderLineItem 포함)")
     void createWithOutDivide() {
         List<OrderRequest> orderRequests = OrderRequestGenerator.generateRequests();
 
@@ -33,7 +33,7 @@ class JpaOrderServiceTest extends TestContainerSupport {
     }
 
     @Test
-    @DisplayName("jpa로 order 데이터 10만개를 분할해서 저장한다. (orderLineItem 포함)")
+    @DisplayName("jpa로 order 데이터 1만개를 분할해서 저장한다. (orderLineItem 포함)")
     void createWithDivide() {
         List<OrderRequest> orderRequests = OrderRequestGenerator.generateRequests();
         List<List<OrderRequest>> partition = Lists.partition(orderRequests, 1000);

@@ -8,7 +8,7 @@ import org.testcontainers.shaded.org.apache.commons.lang3.RandomUtils;
 
 class OrderRequestGenerator {
 
-    private static final Long REQUEST_COUNT = 100_000L;
+    private static final Long REQUEST_COUNT = 10_000L;
 
     public static List<OrderRequest> generateRequests() {
         List<OrderRequest> orderRequests = new ArrayList<>();

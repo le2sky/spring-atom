@@ -29,7 +29,7 @@
         "
       >
         <a
-          href="{{BASE_URL}}"
+          href="https://maeil-mail.vercel.app"
           style="
             display: block;
             margin-bottom: 20px;
@@ -64,7 +64,7 @@
           </p>
         </div>
         <a
-          href="매일메일 질문 상세 링크"
+          th:href="@{https://maeil-mail.vercel.app/question/{id}(id = ${questionId})}"
           style="
             display: inline-block;
             padding: 15px 30px;

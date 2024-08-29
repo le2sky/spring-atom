@@ -11,5 +11,4 @@ values ('Spring MVC에 대한 동작 과정을 설명해주세요.', 'Spring MVC
         'FRONTEND');
 
 insert into subscribe(email, category)
-values ('leehaneul990623@gmail.com', 'BACKEND'),
-       ('brgndyy@gmail.com', 'FRONTEND');
+values ('leehaneul990623@gmail.com', 'BACKEND');

@@ -24,17 +24,18 @@ class EmailSender {
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             mimeMessageHelper.setTo(message.to());
-            mimeMessageHelper.setSubject("오늘의 면접 질문을 보내드려요.");
-            mimeMessageHelper.setText(createContext(message.message()), true);
+            mimeMessageHelper.setSubject(message.subject());
+            mimeMessageHelper.setText(createContext(message), true);
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private String createContext(String question) {
+    private String createContext(MailMessage mailMessage) {
         Context context = new Context();
-        context.setVariable("question", question);
+        context.setVariable("questionId", mailMessage.questionId());
+        context.setVariable("question", mailMessage.message());
         return templateEngine.process("question", context);
     }
 }

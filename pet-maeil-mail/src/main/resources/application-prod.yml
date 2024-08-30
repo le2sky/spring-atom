@@ -5,6 +5,7 @@ spring:
     username: ${db.username}
     password: ${db.password}
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: validate
 

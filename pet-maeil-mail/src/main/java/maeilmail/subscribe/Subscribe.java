@@ -26,6 +26,7 @@ class Subscribe {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private QuestionCategory category;
 

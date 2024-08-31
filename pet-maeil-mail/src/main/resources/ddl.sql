@@ -1,7 +1,7 @@
 create table question
 (
     id       bigint auto_increment,
-    content  varchar(255) not null,
+    content  text not null,
     title    varchar(255) not null,
     category enum ('BACKEND','FRONTEND') not null,
     primary key (id)

@@ -36,6 +36,6 @@ class EmailSender {
         Context context = new Context();
         context.setVariable("questionId", mailMessage.questionId());
         context.setVariable("question", mailMessage.message());
-        return templateEngine.process("question", context);
+        return templateEngine.process("question-v2", context);
     }
 }

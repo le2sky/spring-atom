@@ -25,5 +25,5 @@ class Benefit {
     private Member member;
 
     @Column(nullable = false)
-    private Long money;
+    private Double money;
 }

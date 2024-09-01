@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,8 +17,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
-@EntityListeners(AuditingEntityListener.class)
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 class Coupon {
 
     @Id
@@ -34,7 +36,7 @@ class Coupon {
     private Long issueCount;
 
     @Column(nullable = false)
-    private Long money;
+    private Double money;
 
     @Convert(converter = CouponBenefitStrategyConverter.class, attributeName = "benefit_type")
     private CouponBenefitStrategy benefitStrategy;

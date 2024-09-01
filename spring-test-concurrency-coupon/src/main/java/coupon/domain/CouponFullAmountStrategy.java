@@ -4,11 +4,11 @@ class CouponFullAmountStrategy implements CouponBenefitStrategy {
 
     @Override
     public String getStrategyName() {
-        return null;
+        return "FULL";
     }
 
     @Override
-    public Benefit calculteBenefit(Coupon coupon) {
-        return null;
+    public Double calculateBenefit(Coupon coupon) {
+        return coupon.getMoney();
     }
 }

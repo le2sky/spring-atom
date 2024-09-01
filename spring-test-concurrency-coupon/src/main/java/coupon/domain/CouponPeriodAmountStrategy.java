@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 class CouponPeriodAmountStrategy implements CouponBenefitStrategy {
 
-    private static final int WEEK_PER_PERCENT = 10;
+    private static final int PERCENT_PER_WEEK = 10;
 
     @Override
     public String getStrategyName() {
@@ -14,7 +14,7 @@ class CouponPeriodAmountStrategy implements CouponBenefitStrategy {
     @Override
     public Double calculateBenefit(Coupon coupon) {
         int weeks = calculateWeek(coupon);
-        double minusMoney = (coupon.getMoney() / WEEK_PER_PERCENT) * weeks;
+        double minusMoney = (coupon.getMoney() / PERCENT_PER_WEEK) * weeks;
         return coupon.getMoney() - minusMoney;
     }
 
@@ -23,7 +23,7 @@ class CouponPeriodAmountStrategy implements CouponBenefitStrategy {
         LocalDateTime issuedAt = coupon.getIssuedAt();
 
         int weeks = 0;
-        for (int n = 1; n <= WEEK_PER_PERCENT; n++) {
+        for (int n = 1; n <= PERCENT_PER_WEEK; n++) {
             LocalDateTime base = issuedAt.plusWeeks(n);
             if (nowDate.isBefore(base)) {
                 break;

@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-class MemberCouponService {
+public class MemberCouponService {
 
     private final MemberRepository memberRepository;
     private final CouponRepository couponRepository;

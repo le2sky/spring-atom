@@ -7,9 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class MemberCoupon {
 
@@ -20,7 +22,8 @@ class MemberCoupon {
     @ManyToOne(fetch = FetchType.LAZY)
     private Coupon coupon;
 
-    public MemberCoupon(Coupon coupon) {
-        this.coupon = coupon;
+    public static MemberCoupon issue(Coupon coupon) {
+        coupon.issue();
+        return new MemberCoupon(null, coupon);
     }
 }

@@ -1,30 +1,29 @@
 package coupon.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CouponTest {
+class MemberCouponTest {
 
     @Test
-    @DisplayName("쿠폰을 발행한다.")
+    @DisplayName("사용자 쿠폰을 생성한다.")
     void issue() {
         Coupon coupon = createCoupon(1L);
 
-        coupon.issue();
-
-        assertThat(coupon.getIssueCount()).isEqualTo(1);
+        assertThatCode(() -> MemberCoupon.issue(coupon))
+                .doesNotThrowAnyException();
     }
 
     @Test
-    @DisplayName("발행 제한을 넘기면 더 이상 쿠폰을 발행할 수 없다.")
+    @DisplayName("발행 제한된 쿠폰으로 사용자 쿠폰을 생성한다.")
     void cantIssue() {
         Coupon coupon = createCoupon(0L);
 
-        assertThatThrownBy(coupon::issue)
+        assertThatThrownBy(() -> MemberCoupon.issue(coupon))
                 .isInstanceOf(IllegalStateException.class);
     }
 

@@ -46,6 +46,10 @@ class Coupon {
     private LocalDateTime issuedAt;
 
     public void issue() {
+        if (issueLimit <= issueCount) {
+            throw new IllegalStateException("발행 한도에 도달했습니다.");
+        }
+
         issueCount++;
     }
 }

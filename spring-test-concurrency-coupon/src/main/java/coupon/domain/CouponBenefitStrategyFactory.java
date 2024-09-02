@@ -5,16 +5,16 @@ import java.util.Map;
 
 class CouponBenefitStrategyFactory {
 
-    private static Map<String, CouponBenefitStrategy> classfier = new HashMap<>();
+    private static final Map<String, CouponBenefitStrategy> classifier = new HashMap<>();
 
     static {
         CouponBenefitStrategy fullAmountStrategy = new CouponFullAmountStrategy();
         CouponBenefitStrategy periodAmountStrategy = new CouponPeriodAmountStrategy();
-        classfier.put(fullAmountStrategy.getStrategyName(), fullAmountStrategy);
-        classfier.put(periodAmountStrategy.getStrategyName(), periodAmountStrategy);
+        classifier.put(fullAmountStrategy.getStrategyName(), fullAmountStrategy);
+        classifier.put(periodAmountStrategy.getStrategyName(), periodAmountStrategy);
     }
 
     public static CouponBenefitStrategy generate(String type) {
-        return classfier.get(type);
+        return classifier.get(type);
     }
 }

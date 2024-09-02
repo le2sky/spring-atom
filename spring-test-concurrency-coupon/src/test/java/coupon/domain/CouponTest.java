@@ -39,6 +39,14 @@ class CouponTest {
     }
 
     private Coupon createCoupon(Long issueLimit) {
-        return new Coupon(null, "coupon", issueLimit, 0L, 1000.0, new CouponFullAmountStrategy(), LocalDateTime.now());
+        return new Coupon(
+                null,
+                "coupon",
+                issueLimit,
+                0L,
+                1000.0,
+                new CouponFullAmountStrategy(),
+                LocalDateTime.now()
+        );
     }
 }

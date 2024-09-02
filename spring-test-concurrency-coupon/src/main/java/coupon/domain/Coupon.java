@@ -39,7 +39,7 @@ public class Coupon {
     private Double money;
 
     @Column(nullable = false)
-    @Convert(converter = CouponBenefitStrategyConverter.class, attributeName = "benefit_type")
+    @Convert(converter = CouponBenefitStrategyConverter.class)
     private CouponBenefitStrategy benefitStrategy;
 
     @CreatedDate

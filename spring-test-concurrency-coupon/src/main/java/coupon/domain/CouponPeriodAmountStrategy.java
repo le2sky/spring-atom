@@ -2,7 +2,7 @@ package coupon.domain;
 
 import java.time.LocalDateTime;
 
-class CouponPeriodAmountStrategy implements CouponBenefitStrategy {
+public class CouponPeriodAmountStrategy implements CouponBenefitStrategy {
 
     private static final int PERCENT_PER_WEEK = 10;
 

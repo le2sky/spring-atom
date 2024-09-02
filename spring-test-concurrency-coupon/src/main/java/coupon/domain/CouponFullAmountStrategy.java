@@ -1,6 +1,6 @@
 package coupon.domain;
 
-class CouponFullAmountStrategy implements CouponBenefitStrategy {
+public class CouponFullAmountStrategy implements CouponBenefitStrategy {
 
     @Override
     public String getStrategyName() {

@@ -24,19 +24,26 @@ class MemberCouponService {
     private final BenefitRepository benefitRepository;
 
     @Transactional
-    public void issue(Long memberId, Long couponId) {
-        Member member = memberRepository.findById(memberId).orElseThrow();
-        Coupon coupon = couponRepository.findById(couponId).orElseThrow();
-        MemberCoupon memberCoupon = MemberCoupon.issue(member, coupon);
+    public Long issue(Long memberId, Long couponId) {
+        log.info("신규 쿠폰 발급 coupon = {}, member = {}", couponId, memberId);
 
+        Member member = memberRepository.findById(memberId).orElseThrow();
+        Coupon coupon = couponRepository.findWithLockById(couponId).orElseThrow();
+        MemberCoupon memberCoupon = MemberCoupon.issue(member, coupon);
         memberCouponRepository.save(memberCoupon);
+
+        log.info("쿠폰 발급 종료 member = {}", memberId);
+        return memberCoupon.getId();
     }
 
     @Transactional
     public void exchange(Long memberCouponId) {
-        MemberCoupon memberCoupon = memberCouponRepository.findById(memberCouponId).orElseThrow();
-        Benefit exchange = memberCoupon.exchange();
+        log.info("쿠폰 금액 교환 memberCouponId = {}", memberCouponId);
 
+        MemberCoupon memberCoupon = memberCouponRepository.findWithLockById(memberCouponId).orElseThrow();
+        Benefit exchange = memberCoupon.exchange();
         benefitRepository.save(exchange);
+
+        log.info("금액 교환 종료 memberCouponId = {}", memberCouponId);
     }
 }

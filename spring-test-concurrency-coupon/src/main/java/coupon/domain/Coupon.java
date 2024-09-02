@@ -38,6 +38,7 @@ class Coupon {
     @Column(nullable = false)
     private Double money;
 
+    @Column(nullable = false)
     @Convert(converter = CouponBenefitStrategyConverter.class, attributeName = "benefit_type")
     private CouponBenefitStrategy benefitStrategy;
 
@@ -51,5 +52,9 @@ class Coupon {
         }
 
         issueCount++;
+    }
+
+    public Double calculateBenefit() {
+        return benefitStrategy.calculateBenefit(this);
     }
 }

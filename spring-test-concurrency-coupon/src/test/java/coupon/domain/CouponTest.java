@@ -28,7 +28,17 @@ class CouponTest {
                 .isInstanceOf(IllegalStateException.class);
     }
 
+    @Test
+    @DisplayName("교환 금액을 계산한다.")
+    void calculateBenefit() {
+        Coupon coupon = createCoupon(1L);
+
+        Double result = coupon.calculateBenefit();
+
+        assertThat(result).isEqualTo(1000.0);
+    }
+
     private Coupon createCoupon(Long issueLimit) {
-        return new Coupon(null, "coupon", issueLimit, 0L, 1000.0, null, LocalDateTime.now());
+        return new Coupon(null, "coupon", issueLimit, 0L, 1000.0, new CouponFullAmountStrategy(), LocalDateTime.now());
     }
 }

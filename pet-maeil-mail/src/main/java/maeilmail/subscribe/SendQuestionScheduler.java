@@ -34,6 +34,7 @@ class SendQuestionScheduler {
     }
 
     private MailMessage selectRandomQuestionAndMapToMail(Subscribe subscribe) {
+        log.info("{}님에게 메일을 전송합니다.", subscribe.getEmail());
         String subject = "오늘의 면접 질문을 보내드려요.";
         Random rand = new Random();
         List<Question> questions = questionRepository.findAllByCategory(subscribe.getCategory());

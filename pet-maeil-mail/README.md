@@ -50,9 +50,44 @@
 }
 ```
 
+4. GET /question (전체 면접 질문 리스트)
+
+```
+[
+    {    
+        id : number,
+        title: string
+        content : string
+        category: string(frontend | backend)
+    }
+]
+```
+
+5. GET /question?category=(frontend|backend)
+
+```
+[
+    {    
+        id : number,
+        title: string
+        content : string
+        category: string(frontend | backend)
+    }
+]
+```
+
 ---
 
 ## 1단계
 
 1. 전체 기능 구현은 수요일 오전(08/28)까지
 2. 목요일 배포 (보류)
+
+## 2단계
+
+1. 질문 목록
+2. 질문 필터링
+3. 스팸 방지
+4. 이메일 인증
+5. 중복 이메일 검증
+6. 이메일 수집 동의

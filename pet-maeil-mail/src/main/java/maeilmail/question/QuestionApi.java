@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,8 +15,10 @@ class QuestionApi {
     private final QuestionRepository questionRepository;
 
     @GetMapping("/question")
-    public ResponseEntity<List<QuestionSummary>> getQuestions() {
-        List<QuestionSummary> summaries = questionRepository.queryAll();
+    public ResponseEntity<List<QuestionSummary>> getQuestions(
+            @RequestParam(defaultValue = "all") String category
+    ) {
+        List<QuestionSummary> summaries = questionRepository.queryAll(category);
 
         return ResponseEntity.ok(summaries);
     }

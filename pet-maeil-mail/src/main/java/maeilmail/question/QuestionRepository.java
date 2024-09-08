@@ -19,11 +19,14 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
              """)
     Optional<QuestionSummary> findOneById(Long id);
 
-    @Query("""
+    @Query(value = """
             select new maeilmail.question.QuestionSummary(q)
             from Question q
+            where
+                upper(:categoryName) = 'ALL' OR
+                upper(:categoryName) = q.category
             """)
-    List<QuestionSummary> queryAll();
+    List<QuestionSummary> queryAll(String categoryName);
 
     List<Question> findAllByCategory(QuestionCategory category);
 }

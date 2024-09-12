@@ -1,0 +1,3 @@
+[submodule "pet-maeil-mail/src/main/resources/secret"]
+	path = pet-maeil-mail/src/main/resources/secret
+	url = https://github.com/le2sky/maeilmail-secret.git

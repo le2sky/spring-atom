@@ -17,7 +17,7 @@
   ```
 - `docker restart mysql-source`
 - `mysql -u root -p`
-- `show gloable vbariables;`
+- `show gloable variables;`
 - `show master status;`
 - replication 접근 계정 생성 : `create user 'replication'@'%' identified with mysql_native_password by '1234';`
 - 소스 서버 접근 권한 : `grant replication slave on *.* to 'replication'@'%';`

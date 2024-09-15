@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    source:
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3303/coupon
+    replica:
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/coupon
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        highlight_sql: true
+    hibernate:
+      ddl-auto: validate
+
+logging:
+  level:
+    org.springframework.orm.transaction: DEBUG
+    org.hibernate.orm.jdbc.bind: DEBUG
+    org.springframework.jdbc.datasource.init.ScriptUtils: DEBUG

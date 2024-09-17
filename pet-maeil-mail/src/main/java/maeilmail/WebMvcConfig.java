@@ -19,6 +19,7 @@ class WebMvcConfig implements WebMvcConfigurer {
                         HttpMethod.DELETE.name(),
                         HttpMethod.OPTIONS.name()
                 )
-                .allowedOrigins("https://maeil-mail.vercel.app");
+                .allowedOrigins("https://maeil-mail.vercel.app", "https://www.maeil-mail.kr");
     }
 }
+l

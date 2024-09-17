@@ -22,4 +22,3 @@ class WebMvcConfig implements WebMvcConfigurer {
                 .allowedOrigins("https://maeil-mail.vercel.app", "https://www.maeil-mail.kr");
     }
 }
-l

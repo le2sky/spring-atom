@@ -38,10 +38,9 @@ public class MemberCouponService {
     }
 
     private void validateAlreadyIssued(Long memberId, Long couponId) {
-        memberCouponRepository.findMemberCoupon(memberId, couponId)
-                .ifPresent(it -> {
-                    throw new IllegalStateException("해당 사용자는 이미 쿠폰을 발급했습니다.");
-                });
+        if (memberCouponRepository.existsMemberCouponByMemberIdAndCouponId(memberId, couponId)) {
+            throw new IllegalStateException("해당 사용자는 이미 쿠폰을 발급했습니다.");
+        }
     }
 
     @Transactional

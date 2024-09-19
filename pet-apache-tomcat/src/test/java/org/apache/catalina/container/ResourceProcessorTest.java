@@ -1,11 +1,5 @@
 package org.apache.catalina.container;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import java.util.HashMap;
 import jakarta.controller.Controller;
 import jakarta.controller.ResourceFinder;
 import jakarta.controller.StaticResourceController;
@@ -16,6 +10,13 @@ import jakarta.http.HttpSessionWrapper;
 import jakarta.http.HttpVersion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class ResourceProcessorTest {
 

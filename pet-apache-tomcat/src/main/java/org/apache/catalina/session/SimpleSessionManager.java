@@ -1,9 +1,10 @@
 package org.apache.catalina.session;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import jakarta.servlet.http.HttpSession;
 import org.apache.catalina.Manager;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleSessionManager implements Manager {
 

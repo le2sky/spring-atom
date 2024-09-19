@@ -1,8 +1,9 @@
 package jakarta.http;
 
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.net.URI;
-import jakarta.servlet.http.HttpSession;
 
 public class HttpRequest {
 

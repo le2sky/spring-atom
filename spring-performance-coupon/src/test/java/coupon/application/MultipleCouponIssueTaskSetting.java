@@ -1,18 +1,22 @@
 package coupon.application;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
 import coupon.domain.Coupon;
 import coupon.domain.Member;
 import coupon.domain.MemberRepository;
 
-// 스레드 풀에 쿠폰 동시 교환 테스크를 설정한다.
-class MultipleCouponExchangeTaskSetting implements CouponConcurrencyTaskSetting {
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+
+// 스레드 풀에 쿠폰 동시 발행 테스크를 설정한다.
+class MultipleCouponIssueTaskSetting implements CouponConcurrencyTaskSetting {
 
     private final MemberRepository memberRepository;
     private final MemberCouponService memberCouponService;
 
-    public MultipleCouponExchangeTaskSetting(MemberRepository memberRepository, MemberCouponService memberCouponService) {
+    public MultipleCouponIssueTaskSetting(
+            MemberRepository memberRepository,
+            MemberCouponService memberCouponService
+    ) {
         this.memberRepository = memberRepository;
         this.memberCouponService = memberCouponService;
     }
@@ -26,14 +30,13 @@ class MultipleCouponExchangeTaskSetting implements CouponConcurrencyTaskSetting 
             Coupon coupon
     ) {
 
-        Member member = memberRepository.save(new Member(null, "test-user-1"));
-        Long memberCouponId = memberCouponService.issue(member.getId(), coupon.getId());
-
         for (int i = 0; i < threadCount; i++) {
+            Member member = memberRepository.save(new Member(null, "test-user-" + i));
+
             executorService.submit(() -> {
                 try {
                     startLatch.await();
-                    memberCouponService.exchange(memberCouponId);
+                    memberCouponService.issue(member.getId(), coupon.getId());
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 } finally {

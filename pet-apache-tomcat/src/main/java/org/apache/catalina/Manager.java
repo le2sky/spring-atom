@@ -1,7 +1,8 @@
 package org.apache.catalina;
 
-import java.io.IOException;
 import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
 
 /**
  * A <b>Manager</b> manages the pool of Sessions that are associated with a

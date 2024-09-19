@@ -1,9 +1,10 @@
 package org.apache.catalina;
 
-import java.io.IOException;
-import java.util.UUID;
 import jakarta.http.HttpSessionWrapper;
 import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class SessionWrapper implements HttpSessionWrapper {
 

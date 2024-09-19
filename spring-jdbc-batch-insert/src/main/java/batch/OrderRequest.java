@@ -1,7 +1,8 @@
 package batch;
 
-import java.util.List;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 class OrderRequest {

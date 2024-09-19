@@ -1,6 +1,5 @@
 package org.apache.catalina.container;
 
-import java.net.Socket;
 import jakarta.controller.ResourceFinder;
 import jakarta.controller.StaticResourceController;
 import jakarta.http.HttpRequest;
@@ -8,6 +7,8 @@ import jakarta.http.HttpResponse;
 import jakarta.http.HttpSessionWrapper;
 import org.apache.coyote.Processor;
 import org.apache.coyote.http11.Http11Processor;
+
+import java.net.Socket;
 
 public class Container {
 

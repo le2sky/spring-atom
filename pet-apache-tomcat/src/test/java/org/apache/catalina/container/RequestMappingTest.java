@@ -1,10 +1,5 @@
 package org.apache.catalina.container;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-
-import java.util.Collections;
 import jakarta.controller.Controller;
 import jakarta.http.Header;
 import jakarta.http.HttpBody;
@@ -13,6 +8,12 @@ import jakarta.http.HttpSessionWrapper;
 import jakarta.http.HttpVersion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
 
 class RequestMappingTest {
 

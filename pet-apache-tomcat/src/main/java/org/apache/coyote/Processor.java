@@ -16,9 +16,10 @@
  */
 package org.apache.coyote;
 
-import java.io.IOException;
 import jakarta.http.HttpRequest;
 import jakarta.http.HttpResponse;
+
+import java.io.IOException;
 
 /**
  * Common interface for processors of all protocols.

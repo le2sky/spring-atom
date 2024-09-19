@@ -31,12 +31,6 @@ public class Coupon {
     private String name;
 
     @Column(nullable = false)
-    private Long issueLimit;
-
-    @Column(nullable = false)
-    private Long issueCount;
-
-    @Column(nullable = false)
     private Double money;
 
     @Column(nullable = false)
@@ -46,14 +40,6 @@ public class Coupon {
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime issuedAt;
-
-    public void issue() {
-        if (issueLimit <= issueCount) {
-            throw new IllegalStateException("발행 한도에 도달했습니다.");
-        }
-
-        issueCount++;
-    }
 
     public Double calculateBenefit() {
         return benefitStrategy.calculateBenefit(this);

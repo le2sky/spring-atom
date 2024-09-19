@@ -29,9 +29,8 @@ class MultipleCouponIssueTaskSetting implements CouponConcurrencyTaskSetting {
             CountDownLatch startLatch,
             Coupon coupon
     ) {
-
+        Member member = memberRepository.save(new Member(null, "test-user-1"));
         for (int i = 0; i < threadCount; i++) {
-            Member member = memberRepository.save(new Member(null, "test-user-" + i));
 
             executorService.submit(() -> {
                 try {

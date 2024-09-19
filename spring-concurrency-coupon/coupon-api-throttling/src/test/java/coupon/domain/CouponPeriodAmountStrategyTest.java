@@ -36,8 +36,6 @@ class CouponPeriodAmountStrategyTest {
         return new Coupon(
                 null,
                 "sample",
-                1L,
-                0L,
                 money,
                 null,
                 beforeWeek

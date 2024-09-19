@@ -35,7 +35,6 @@ public class MemberCoupon {
     private Coupon coupon;
 
     public static MemberCoupon issue(Member member, Coupon coupon) {
-        coupon.issue();
         return new MemberCoupon(null, false, member, coupon);
     }
 

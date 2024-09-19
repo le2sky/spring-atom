@@ -27,8 +27,9 @@ public class MemberCouponService {
     public Long issue(Long memberId, Long couponId) {
         log.info("신규 쿠폰 발급 coupon = {}, member = {}", couponId, memberId);
 
+        validateAlreadyIssued(memberId, couponId);
         Member member = memberRepository.findById(memberId).orElseThrow();
-        Coupon coupon = couponRepository.findWithLockById(couponId).orElseThrow();
+        Coupon coupon = couponRepository.findById(couponId).orElseThrow();
         MemberCoupon memberCoupon = MemberCoupon.issue(member, coupon);
         memberCouponRepository.save(memberCoupon);
 
@@ -36,11 +37,18 @@ public class MemberCouponService {
         return memberCoupon.getId();
     }
 
+    private void validateAlreadyIssued(Long memberId, Long couponId) {
+        memberCouponRepository.findMemberCoupon(memberId, couponId)
+                .ifPresent(it -> {
+                    throw new IllegalStateException("해당 사용자는 이미 쿠폰을 발급했습니다.");
+                });
+    }
+
     @Transactional
     public void exchange(Long memberCouponId) {
         log.info("쿠폰 금액 교환 memberCouponId = {}", memberCouponId);
 
-        MemberCoupon memberCoupon = memberCouponRepository.findWithLockById(memberCouponId).orElseThrow();
+        MemberCoupon memberCoupon = memberCouponRepository.findById(memberCouponId).orElseThrow();
         Benefit exchange = memberCoupon.exchange();
         benefitRepository.save(exchange);
 

@@ -1,0 +1,8 @@
+- https://github.com/naver/ngrinder/releases
+- ngrinder-controller-{version}.war 다운로드
+- `java -Djava.io.tmpdir=/Users/haneul/Desktop/ngrinder-temp -jar ngrinder-controller-{version}.war --port=8300`
+- 초기 ID, PW : admin, admin
+- 에이전트 설치
+- `tar -xvf ngrinder-agent-{version}-localhost.tar`
+- `cd ngrinder-agent`
+- `./run_agent.sh`

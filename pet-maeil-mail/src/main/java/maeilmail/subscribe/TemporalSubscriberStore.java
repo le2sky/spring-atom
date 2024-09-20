@@ -7,15 +7,15 @@ class TemporalSubscriberStore {
 
     private static final int EMAIL_POSITION = 0;
     private static final String KEY_DELIMITER = ":";
-    private static final String KEY_FORMAT = "%s" + KEY_DELIMITER + "%d";
+    private static final String KEY_FORMAT = "%s" + KEY_DELIMITER + "%s";
     private static final String INVALID_EMAIL_MESSAGE = "인증되지 않은 이메일입니다.";
     private static final Map<String, Boolean> store = new ConcurrentHashMap<>();
 
-    public static void add(String email, Long code) {
+    public static void add(String email, String code) {
         store.put(createKey(email, code), false);
     }
 
-    public static void verify(String email, Long code) {
+    public static void verify(String email, String code) {
         Boolean isVerified = store.get(createKey(email, code));
         if (isVerified == null) {
             throw new IllegalStateException(INVALID_EMAIL_MESSAGE);
@@ -40,7 +40,7 @@ class TemporalSubscriberStore {
         return keyToken[EMAIL_POSITION].equals(email);
     }
 
-    private static String createKey(String email, Long code) {
+    private static String createKey(String email, String code) {
         return String.format(KEY_FORMAT, email, code);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +18,7 @@ import java.util.Random;
 class SendQuestionScheduler {
 
     private final EmailSender mailSender;
+    private final SubscribeQuestionView subscribeQuestionView;
     private final SubscribeRepository subscribeRepository;
     private final QuestionRepository questionRepository;
 
@@ -37,15 +39,25 @@ class SendQuestionScheduler {
     private MailMessage selectRandomQuestionAndMapToMail(Subscribe subscribe) {
         log.info("{}님에게 메일을 전송합니다.", subscribe.getEmail());
         String subject = "오늘의 면접 질문을 보내드려요.";
+        Question question = choiceQuestion(subscribe);
+        String text = createText(question);
+
+        return new MailMessage(subscribe.getEmail(), subject, text);
+    }
+
+    private Question choiceQuestion(Subscribe subscribe) {
         Random rand = new Random();
         List<Question> questions = questionRepository.findAllByCategory(subscribe.getCategory());
         int index = rand.nextInt(questions.size());
-        Question question = questions.get(index);
 
-        return new MailMessage(
-                subscribe.getEmail(),
-                subject,
-                question.getId(),
-                question.getTitle());
+        return questions.get(index);
+    }
+
+    private String createText(Question question) {
+        HashMap<Object, Object> attribute = new HashMap<>();
+        attribute.put("questionId", question.getId());
+        attribute.put("question", question.getContent());
+
+        return subscribeQuestionView.render(attribute);
     }
 }

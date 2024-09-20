@@ -63,7 +63,7 @@
 ]
 ```
 
-5. GET /question?category=(frontend|backend)
+5. GET /question?category=(frontend | backend) (질문 필터링)
 
 ```
 [
@@ -74,6 +74,23 @@
         category: string(frontend | backend)
     }
 ]
+```
+
+6. POST /subscribe/verify/send (인증 이메일 발송)
+
+```
+{    
+    email : string
+}
+```
+
+7. POST /subscribe/verify (이메일 인증 요청)
+
+```
+{    
+    email : string
+    code : string
+}
 ```
 
 ---

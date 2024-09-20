@@ -12,16 +12,16 @@ class SubscribeApi {
 
     private final SubscribeQuestionService subscribeQuestionService;
 
-    @PostMapping("/subscribe/verify")
-    public ResponseEntity<Void> request(@RequestBody VerifyEmailRequest request) {
-        subscribeQuestionService.verify(request);
+    @PostMapping("/subscribe/verify/send")
+    public ResponseEntity<Void> send(@RequestBody VerifyEmailRequest request) {
+        subscribeQuestionService.sendCodeIncludedMail(request);
 
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/subscribe/check-verified")
-    public ResponseEntity<Void> checkVerified(@RequestBody CheckVerifiedRequest request) {
-        subscribeQuestionService.checkVerified(request);
+    @PostMapping("/subscribe/verify")
+    public ResponseEntity<Void> verify(@RequestBody VerifyCodeRequest request) {
+        subscribeQuestionService.verify(request);
 
         return ResponseEntity.noContent().build();
     }

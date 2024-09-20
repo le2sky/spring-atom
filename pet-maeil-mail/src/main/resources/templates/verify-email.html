@@ -1,14 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>매일 메일</title>
-</head>
-<body style="margin: 0; padding: 0">
-<div style="height: 100%; width: 100%; font-family: Arial, sans-serif">
-    <div
-            style="
+  </head>
+  <body style="margin: 0; padding: 0">
+    <div style="height: 100%; width: 100%; font-family: Arial, sans-serif">
+      <div
+        style="
           background-color: #ffffff;
           padding: 40px;
           border-radius: 8px;
@@ -18,10 +18,10 @@
           width: 100%;
           margin: 0 auto;
         "
-    >
+      >
         <a
-                href="https://www.maeil-mail.kr"
-                style="
+          href="https://www.maeil-mail.kr/"
+          style="
             display: block;
             margin-bottom: 20px;
             text-decoration: none;
@@ -30,10 +30,10 @@
             font-weight: bold;
           "
         >
-            매일 메일
+          매일 메일
         </a>
         <div
-                style="
+          style="
             background-color: #f1f3f5;
             padding: 20px;
             border-radius: 8px;
@@ -41,35 +41,36 @@
             text-align: left;
           "
         >
-            <b style="color: #212529; font-size: 18px">오늘의 질문은?</b>
-            <p
-                    style="
+          <div style="width: 100%; text-align: center">
+            <b style="color: #212529; font-size: 24px">인증 번호</b>
+          </div>
+          <p
+            style="
               font-size: 24px;
               font-weight: bold;
               line-height: 1.5;
               color: #495057;
               margin: 10px 0 0;
+              text-align: center;
             "
-            th:text="${question}"
-            >
-            </p>
+            th:text="${code}"
+          >
+          </p>
         </div>
-        <a
-                th:href="@{https://www.maeil-mail.kr/question/{id}(id = ${questionId})}"
-                style="
+        <span
+          style="
             display: inline-block;
             padding: 15px 30px;
-            background-color: #6f6f6f;
-            color: white;
+            color: #000;
             text-decoration: none;
             border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
           "
         >
-            답변 확인하러 가기
-        </a>
+          인증 번호를 입력해주세요.
+        </span>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

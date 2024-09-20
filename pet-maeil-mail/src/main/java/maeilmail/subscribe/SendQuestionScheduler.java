@@ -56,7 +56,7 @@ class SendQuestionScheduler {
     private String createText(Question question) {
         HashMap<Object, Object> attribute = new HashMap<>();
         attribute.put("questionId", question.getId());
-        attribute.put("question", question.getContent());
+        attribute.put("question", question.getTitle());
 
         return subscribeQuestionView.render(attribute);
     }

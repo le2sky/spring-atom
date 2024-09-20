@@ -22,7 +22,7 @@ class EmailSender {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             mimeMessageHelper.setTo(message.to());
             mimeMessageHelper.setSubject(message.subject());
-            mimeMessageHelper.setText(message.text());
+            mimeMessageHelper.setText(message.text(), true);
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
             throw new RuntimeException(e);

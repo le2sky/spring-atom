@@ -5,9 +5,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 class TemporalSubscriberStore {
 
-    private static final String KEY_FORMAT = "%s:%d";
+    private static final int EMAIL_POSITION = 0;
+    private static final String KEY_DELIMITER = ":";
+    private static final String KEY_FORMAT = "%s" + KEY_DELIMITER + "%d";
     private static final String INVALID_EMAIL_MESSAGE = "인증되지 않은 이메일입니다.";
-    private final static Map<String, Boolean> store = new ConcurrentHashMap<>();
+    private static final Map<String, Boolean> store = new ConcurrentHashMap<>();
 
     public static void add(String email, Long code) {
         store.put(createKey(email, code), false);
@@ -23,14 +25,19 @@ class TemporalSubscriberStore {
     }
 
     public static void requireVerified(String email) {
-        String key = store.keySet().stream()
-                .filter(it -> it.contains(email))
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException(INVALID_EMAIL_MESSAGE));
+        boolean isVerified = store.keySet().stream()
+                .filter(it -> isSameEmail(it, email))
+                .anyMatch(store::get);
 
-        if (!store.get(key)) {
+        if (!isVerified) {
             throw new IllegalStateException(INVALID_EMAIL_MESSAGE);
         }
+    }
+
+    private static boolean isSameEmail(String key, String email) {
+        String[] keyToken = key.split(KEY_DELIMITER);
+
+        return keyToken[EMAIL_POSITION].equals(email);
     }
 
     private static String createKey(String email, Long code) {

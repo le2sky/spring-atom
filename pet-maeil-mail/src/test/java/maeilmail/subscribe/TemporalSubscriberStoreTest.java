@@ -52,4 +52,15 @@ class TemporalSubscriberStoreTest {
         assertThatCode(() -> TemporalSubscriberStore.requireVerified("test5@naver.com"))
                 .doesNotThrowAnyException();
     }
+    
+    @Test
+    @DisplayName("이메일에 대한 여러 인증 기록이 존재하는 경우, 하나라도 검증되면 허용한다.")
+    void requireVerified3() {
+        TemporalSubscriberStore.add("test6@naver.com", 3212L);
+        TemporalSubscriberStore.add("test6@naver.com", 1234L);
+        TemporalSubscriberStore.verify("test6@naver.com", 3212L);
+
+        assertThatCode(() -> TemporalSubscriberStore.requireVerified("test6@naver.com"))
+                .doesNotThrowAnyException();
+    }
 }

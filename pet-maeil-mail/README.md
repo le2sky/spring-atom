@@ -26,6 +26,7 @@
 {
     email : string
     category : string(frontend | backend)
+    code : string
 }
 ```
 
@@ -81,15 +82,6 @@
 ```
 {    
     email : string
-}
-```
-
-7. POST /subscribe/verify (이메일 인증 요청)
-
-```
-{    
-    email : string
-    code : string
 }
 ```
 

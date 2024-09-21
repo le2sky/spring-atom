@@ -1,13 +1,12 @@
 package maeilmail.subscribe;
 
+import java.util.HashMap;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import maeilmail.question.QuestionCategory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Slf4j
@@ -30,18 +29,15 @@ class SubscribeQuestionService {
         TemporalSubscriberStore.add(request.email(), code);
     }
 
-    public void verify(VerifyCodeRequest request) {
-        log.info("임시 구독자 인증 요청, 이메일 = {} 코드 = {}", request.email(), request.code());
-        TemporalSubscriberStore.verify(request.email(), request.code());
-    }
-
     @Transactional
     public void subscribe(SubscribeQuestionRequest request) {
         log.info("이메일 구독 요청, 이메일 = {}", request.email());
-        TemporalSubscriberStore.requireVerified(request.email());
+
+        TemporalSubscriberStore.verify(request.email(), request.code());
         QuestionCategory category = QuestionCategory.from(request.category());
         Subscribe subscribe = new Subscribe(request.email(), category);
 
+        log.info("이메일 구독 성공, 이메일 = {}", request.email());
         subscribeRepository.save(subscribe);
     }
 

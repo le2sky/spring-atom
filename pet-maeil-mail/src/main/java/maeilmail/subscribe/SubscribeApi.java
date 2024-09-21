@@ -19,13 +19,6 @@ class SubscribeApi {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/subscribe/verify")
-    public ResponseEntity<Void> verify(@RequestBody VerifyCodeRequest request) {
-        subscribeQuestionService.verify(request);
-
-        return ResponseEntity.noContent().build();
-    }
-
     @PostMapping("/subscribe")
     public ResponseEntity<Void> subscribe(@RequestBody SubscribeQuestionRequest request) {
         subscribeQuestionService.subscribe(request);

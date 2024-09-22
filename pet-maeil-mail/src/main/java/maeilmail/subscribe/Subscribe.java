@@ -17,7 +17,7 @@ import maeilmail.question.QuestionCategory;
 @Getter
 @Table(name = "subscribe")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-class Subscribe {
+public class Subscribe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package maeilmail.subscribe.policy;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ class RandomChoicePolicy implements ChoiceQuestionPolicy {
     private final QuestionRepository questionRepository;
 
     @Override
-    public Question choice(Subscribe subscribe) {
+    public Question choice(Subscribe subscribe, LocalDate today) {
         Random rand = new Random();
         List<Question> questions = questionRepository.findAllByCategory(subscribe.getCategory());
         int index = rand.nextInt(questions.size());

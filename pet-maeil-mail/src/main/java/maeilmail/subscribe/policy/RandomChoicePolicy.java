@@ -19,7 +19,7 @@ class RandomChoicePolicy implements ChoiceQuestionPolicy {
     @Override
     public Question choice(Subscribe subscribe, LocalDate today) {
         Random rand = new Random();
-        List<Question> questions = questionRepository.findAllByCategory(subscribe.getCategory());
+        List<Question> questions = questionRepository.findAllByCategoryOrderByIdAsc(subscribe.getCategory());
         int index = rand.nextInt(questions.size());
 
         return questions.get(index);

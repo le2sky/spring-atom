@@ -16,7 +16,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             select new maeilmail.question.QuestionSummary(q)
             from Question q
             where q.id = :id
-             """)
+            """)
     Optional<QuestionSummary> findOneById(Long id);
 
     @Query(value = """
@@ -28,5 +28,5 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             """)
     List<QuestionSummary> queryAll(String categoryName);
 
-    List<Question> findAllByCategory(QuestionCategory category);
+    List<Question> findAllByCategoryOrderByIdAsc(QuestionCategory category);
 }

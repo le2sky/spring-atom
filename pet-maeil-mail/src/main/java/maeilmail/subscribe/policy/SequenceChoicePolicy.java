@@ -35,7 +35,7 @@ class SequenceChoicePolicy implements ChoiceQuestionPolicy {
     }
 
     private List<Question> findQuestions(Subscribe subscribe) {
-        List<Question> questions = questionRepository.findAllByCategory(subscribe.getCategory());
+        List<Question> questions = questionRepository.findAllByCategoryOrderByIdAsc(subscribe.getCategory());
         validateQuestionEmpty(questions);
 
         return questions;

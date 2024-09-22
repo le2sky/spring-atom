@@ -35,11 +35,11 @@ class SendQuestionScheduler {
     }
 
     private MailMessage selectRandomQuestionAndMapToMail(Subscribe subscribe) {
-        log.info("{}님에게 메일을 전송합니다.", subscribe.getEmail());
         String subject = "오늘의 면접 질문을 보내드려요.";
         Question question = choiceQuestionPolicy.choice(subscribe, LocalDate.now());
         String text = createText(question);
 
+        log.info("메일을 전송합니다. email = {} question = {}", subscribe.getEmail(), question.getTitle());
         return new MailMessage(subscribe.getEmail(), subject, text);
     }
 

@@ -1,5 +1,7 @@
 package com.techcourse;
 
+import java.util.HashMap;
+import java.util.Map;
 import com.techcourse.controller.HelloController;
 import com.techcourse.controller.LoginController;
 import com.techcourse.controller.NotFoundController;
@@ -7,9 +9,6 @@ import com.techcourse.controller.RegisterController;
 import jakarta.controller.Controller;
 import org.apache.catalina.container.RequestMapping;
 import org.apache.catalina.startup.Tomcat;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Application {
 

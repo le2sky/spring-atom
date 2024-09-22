@@ -1,17 +1,16 @@
 package org.apache.catalina.container;
 
-import com.techcourse.Application;
-import jakarta.http.HttpSessionWrapper;
-import org.junit.jupiter.api.Test;
-import support.StubSocket;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
+import com.techcourse.Application;
+import jakarta.http.HttpSessionWrapper;
+import org.junit.jupiter.api.Test;
+import support.StubSocket;
 
 class ContainerTest {
 

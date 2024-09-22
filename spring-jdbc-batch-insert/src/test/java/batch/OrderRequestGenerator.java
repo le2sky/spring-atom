@@ -1,11 +1,10 @@
 package batch;
 
-import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
-import org.testcontainers.shaded.org.apache.commons.lang3.RandomUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
+import org.testcontainers.shaded.org.apache.commons.lang3.RandomUtils;
 
 class OrderRequestGenerator {
 

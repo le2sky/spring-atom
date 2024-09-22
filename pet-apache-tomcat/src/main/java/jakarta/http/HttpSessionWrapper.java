@@ -1,8 +1,7 @@
 package jakarta.http;
 
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
+import jakarta.servlet.http.HttpSession;
 
 public interface HttpSessionWrapper {
 

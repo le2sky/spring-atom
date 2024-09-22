@@ -1,11 +1,10 @@
 package batch;
 
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testcontainers.shaded.com.google.common.collect.Lists;
-
-import java.util.List;
 
 /**
  * 삽입 완료 후, 엔티티 식별자가 매핑되어야 한다.

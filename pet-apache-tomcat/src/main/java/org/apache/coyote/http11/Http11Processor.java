@@ -1,5 +1,13 @@
 package org.apache.coyote.http11;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.http.ContentType;
 import jakarta.http.Header;
 import jakarta.http.HttpBody;
@@ -12,15 +20,6 @@ import jakarta.http.HttpVersion;
 import org.apache.coyote.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Http11Processor implements Processor {
 

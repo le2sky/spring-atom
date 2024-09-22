@@ -1,5 +1,11 @@
 package jakarta.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import jakarta.http.Header;
 import jakarta.http.HttpBody;
 import jakarta.http.HttpHeaderKey;
@@ -9,13 +15,6 @@ import jakarta.http.HttpSessionWrapper;
 import jakarta.http.HttpVersion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
 
 class StaticResourceControllerTest {
 

@@ -1,12 +1,11 @@
 package org.apache.catalina.session;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpSessionContext;
-
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSessionContext;
 
 public class SimpleSession implements HttpSession {
 

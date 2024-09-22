@@ -1,5 +1,7 @@
 package com.techcourse.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import jakarta.http.HttpRequest;
 import jakarta.http.HttpResponse;
 import jakarta.http.HttpStatus;
@@ -7,8 +9,6 @@ import jakarta.http.HttpVersion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class NotFoundControllerTest {
 

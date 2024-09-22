@@ -1,15 +1,14 @@
 package org.apache.catalina.connector;
 
-import org.apache.catalina.container.Container;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import org.apache.catalina.container.Container;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Connector implements Runnable {
 

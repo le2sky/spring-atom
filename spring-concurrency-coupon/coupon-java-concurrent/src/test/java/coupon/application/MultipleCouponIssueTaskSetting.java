@@ -1,11 +1,10 @@
 package coupon.application;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import coupon.domain.Coupon;
 import coupon.domain.Member;
 import coupon.domain.MemberRepository;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
 
 // 스레드 풀에 쿠폰 동시 발행 테스크를 설정한다.
 class MultipleCouponIssueTaskSetting implements CouponConcurrencyTaskSetting {

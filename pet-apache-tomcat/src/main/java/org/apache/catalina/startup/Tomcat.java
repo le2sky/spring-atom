@@ -1,5 +1,6 @@
 package org.apache.catalina.startup;
 
+import java.io.IOException;
 import jakarta.http.HttpSessionWrapper;
 import org.apache.catalina.Manager;
 import org.apache.catalina.SessionWrapper;
@@ -9,8 +10,6 @@ import org.apache.catalina.container.RequestMapping;
 import org.apache.catalina.session.SimpleSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class Tomcat {
 

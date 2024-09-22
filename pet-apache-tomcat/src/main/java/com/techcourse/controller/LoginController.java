@@ -1,5 +1,6 @@
 package com.techcourse.controller;
 
+import java.util.NoSuchElementException;
 import com.techcourse.db.InMemoryUserRepository;
 import com.techcourse.model.User;
 import jakarta.controller.AbstractController;
@@ -10,8 +11,6 @@ import jakarta.http.HttpRequest;
 import jakarta.http.HttpResponse;
 import jakarta.http.HttpStatus;
 import jakarta.servlet.http.HttpSession;
-
-import java.util.NoSuchElementException;
 
 public class LoginController extends AbstractController {
 

@@ -20,22 +20,12 @@ public class MemberCouponService {
     private final MemberCouponIssueLock memberCouponIssueLock;
 
     public Long issue(Long memberId, Long couponId) {
-        Long id = null;
-        RuntimeException throwException = null;
+        memberCouponIssueLock.lock(memberId, couponId);
         try {
-            memberCouponIssueLock.lock(memberId, couponId);
-            id = memberCouponIssuer.issue(memberId, couponId);
-        } catch (RuntimeException e) {
-            throwException = e;
+            return memberCouponIssuer.issue(memberId, couponId);
         } finally {
             memberCouponIssueLock.unlock(memberId, couponId);
         }
-
-        if (id == null) {
-            throw throwException;
-        }
-
-        return id;
     }
 
     @Transactional

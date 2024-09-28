@@ -45,7 +45,6 @@ class MemberCouponServiceTest {
     @Autowired
     private BenefitRepository benefitRepository;
 
-
     @Test
     @DisplayName("사용자가 이미 해당 쿠폰을 발급하면 더 이상 발급 받을 수 없다.")
     void checkMultiIssue() {
@@ -57,7 +56,6 @@ class MemberCouponServiceTest {
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("해당 사용자는 이미 쿠폰을 발급했습니다.");
     }
-
 
     @Test
     @DisplayName("스레드 100개 동시 쿠폰 발급 요청 - 같은 사용자 발급 1개 제한")

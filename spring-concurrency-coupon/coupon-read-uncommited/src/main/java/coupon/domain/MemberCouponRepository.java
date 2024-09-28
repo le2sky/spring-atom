@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MemberCouponRepository extends JpaRepository<MemberCoupon, Long> {
 
     boolean existsMemberCouponByMemberIdAndCouponId(Long memberId, Long couponId);
+
+    MemberCoupon findByMemberIdAndCouponId(Long memberId, Long couponId);
 }

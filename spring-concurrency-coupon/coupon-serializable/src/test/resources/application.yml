@@ -1,0 +1,19 @@
+spring:
+  sql:
+    init:
+      mode: never
+  datasource:
+    url: jdbc:tc:mysql:8://test
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+    username: user
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        auto_quote_keyword: true
+        format_sql: true
+    show-sql: true
+    defer-datasource-initialization: true

@@ -31,12 +31,13 @@ limit 1;
 
 - 이 경우 S,GAP 잠금을 확인할 수 있다. (넥스트 키락이 아닌 Shrared Gap Lock)
 - 만약 member_coupon(memberId, couponId) 조합이 (1, 2), (6, 2) 두 개 존재하는 경우에는
+- 2(존재하지 않은 member_id)보다 큰 6을 기준으로 S,GAP(gap lock) 이 걸린다.
 - member_id가 5인 경우까지 갭락을 건다.
 - 위 예시의 경우 member_id 인덱스를 사용하는데, 세컨더리 인덱스 member_id에서 1,6 순서로 저장되어 있다.
 - 이때 반복 읽기를 보장하려면 member_id 1부터 5까지는 모두 막아야 1,6 순서를 보장한다.
 - 즉, member_id가 1부터 5까지 들어가는 member_coupon을 막으면, member_coupon(1, 2), member_coupon(6, 2) 사이에 새로운 값이 insert되는 것을 막을 수
   있다.
-- 핵심은 gap락과 s락으로 인해 다른 트랜잭션에서 경합이 발생해 동시성 문제를 해결할 수 있다는 것이다.
+- 핵심은 락으로 인해 다른 트랜잭션에서 경합이 발생해 동시성 문제를 해결할 수 있다는 것이다.
 
 #### 장점과 한계
 

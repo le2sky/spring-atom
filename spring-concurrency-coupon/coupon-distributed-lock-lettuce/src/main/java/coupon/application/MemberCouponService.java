@@ -1,7 +1,5 @@
 package coupon.application;
 
-import com.zaxxer.hikari.HikariDataSource;
-import com.zaxxer.hikari.HikariPoolMXBean;
 import coupon.domain.Benefit;
 import coupon.domain.BenefitRepository;
 import coupon.domain.MemberCoupon;
@@ -10,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Slf4j
 @Service
@@ -21,20 +18,31 @@ public class MemberCouponService {
     private final MemberCouponIssueLock memberCouponIssueLock;
     private final MemberCouponRepository memberCouponRepository;
     private final BenefitRepository benefitRepository;
-    private final HikariDataSource hikariDataSource;
 
     public Long issue(Long memberId, Long couponId) {
-        HikariPoolMXBean hikariPoolMXBean = hikariDataSource.getHikariPoolMXBean();
-        String currentTransactionName = TransactionSynchronizationManager.getCurrentTransactionName();
-
-        log.info("active connection count = {} current transaction = {}", hikariPoolMXBean.getActiveConnections(), currentTransactionName);
-        memberCouponIssueLock.lock(memberId, couponId);
-        log.info("active connection count = {} current transaction = {}", hikariPoolMXBean.getActiveConnections(), currentTransactionName);
-
         try {
+            spinLock(memberId, couponId);
             return memberCouponIssuer.issue(memberId, couponId);
         } finally {
             memberCouponIssueLock.unlock(memberId, couponId);
+        }
+    }
+
+    private void spinLock(Long memberId, Long couponId) {
+        int tryCount = 10;
+
+        while (!memberCouponIssueLock.lock(memberId, couponId)) {
+            if (tryCount-- == 0) {
+                // lock 획득 실패 처리
+                throw new RuntimeException();
+            }
+
+            try {
+                // redis에 너무 많은 부하를 주지 않기 위해 sleep을 설정
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

@@ -16,8 +16,10 @@ import coupon.domain.Member;
 import coupon.domain.MemberCoupon;
 import coupon.domain.MemberCouponRepository;
 import coupon.domain.MemberRepository;
+import coupon.support.RedisSetup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -28,6 +30,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * 따라서, 테스트 레벨에서 격리를 지원하지 않도록 구현했다.
  */
 @SpringBootTest
+@ExtendWith(RedisSetup.class)
 class MemberCouponServiceTest {
 
     @Autowired

@@ -1,5 +1,7 @@
 package coupon.application;
 
+import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.HikariPoolMXBean;
 import coupon.domain.Benefit;
 import coupon.domain.BenefitRepository;
 import coupon.domain.MemberCoupon;
@@ -8,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Slf4j
 @Service
@@ -18,10 +21,17 @@ public class MemberCouponService {
     private final MemberCouponIssueLock memberCouponIssueLock;
     private final MemberCouponRepository memberCouponRepository;
     private final BenefitRepository benefitRepository;
+    private final HikariDataSource hikariDataSource;
 
     public Long issue(Long memberId, Long couponId) {
+        HikariPoolMXBean hikariPoolMXBean = hikariDataSource.getHikariPoolMXBean();
+        String currentTransactionName = TransactionSynchronizationManager.getCurrentTransactionName();
+
+        log.info("active connection count = {} current transaction = {}", hikariPoolMXBean.getActiveConnections(), currentTransactionName);
+        memberCouponIssueLock.lock(memberId, couponId);
+        log.info("active connection count = {} current transaction = {}", hikariPoolMXBean.getActiveConnections(), currentTransactionName);
+
         try {
-            memberCouponIssueLock.lock(memberId, couponId);
             return memberCouponIssuer.issue(memberId, couponId);
         } finally {
             memberCouponIssueLock.unlock(memberId, couponId);

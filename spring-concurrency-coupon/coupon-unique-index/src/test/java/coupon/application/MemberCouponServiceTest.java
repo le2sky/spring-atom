@@ -58,7 +58,6 @@ class MemberCouponServiceTest {
                 .hasMessage("해당 사용자는 이미 쿠폰을 발급했습니다.");
     }
 
-
     @Test
     @DisplayName("스레드 100개 동시 쿠폰 발급 요청 - 같은 사용자 발급 1개 제한")
     void multipleIssueCoupon() throws InterruptedException {

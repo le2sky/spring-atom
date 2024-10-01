@@ -14,35 +14,17 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberCouponService {
 
-    private final MemberCouponIssuer memberCouponIssuer;
     private final MemberCouponIssueLock memberCouponIssueLock;
+    private final MemberCouponIssuer memberCouponIssuer;
     private final MemberCouponRepository memberCouponRepository;
     private final BenefitRepository benefitRepository;
 
     public Long issue(Long memberId, Long couponId) {
+        memberCouponIssueLock.lock(memberId, couponId);
         try {
-            spinLock(memberId, couponId);
             return memberCouponIssuer.issue(memberId, couponId);
         } finally {
             memberCouponIssueLock.unlock(memberId, couponId);
-        }
-    }
-
-    private void spinLock(Long memberId, Long couponId) {
-        int tryCount = 10;
-
-        while (!memberCouponIssueLock.lock(memberId, couponId)) {
-            if (tryCount-- == 0) {
-                // lock 획득 실패 처리
-                throw new RuntimeException();
-            }
-
-            try {
-                // redis에 너무 많은 부하를 주지 않기 위해 sleep을 설정
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
 

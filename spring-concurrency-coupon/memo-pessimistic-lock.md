@@ -45,3 +45,41 @@ boolean existsMemberCouponByMemberIdAndCouponId(Long memberId, Long couponId);
     - 가령, `insert into member_coupon(is_used, coupon_id, member_id)
     values (false, 3, 12);` 과 같은 쿼리는 coupon_id와 member_id가 전혀 다르다.
     - 하지만 gap락에 의해서 위 쿼리 또한 막히게 되니 동시 처리 능력이 상당히 희생된다.
+
+데드락 예시 - 세션 1
+
+```mysql
+begin;
+
+## 1. coupon 4, member coupon 4 gap == coupon 1 ~ 3 충돌
+select id
+from member_coupon
+where member_id = 2
+  and coupon_id = 2
+    for share;
+
+## 3. 세션 2 gap락 대기
+insert into member_coupon(is_used, coupon_id, member_id)
+values (false, 2, 2);
+
+rollback;
+```
+
+데드락 예시 - 세션 2
+
+```mysql
+begin;
+
+### 2. coupon 4, member coupon 4 gap == coupon 1 ~ 3 충돌
+select id
+from member_coupon
+where member_id = 2
+  and coupon_id = 2
+    for share;
+
+## 4. 세션 1 gap락 대기 = 데드락
+insert into member_coupon(is_used, coupon_id, member_id)
+values (false, 2, 2);
+
+rollback;
+```

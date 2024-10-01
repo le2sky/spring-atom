@@ -9,7 +9,7 @@
 ```java
 
 public Long issue(Long memberId, Long couponId) {
-    // 락 획득에 실패하면 예외로 처리하여, finally의 unlock으로 가지 않도록 한다.
+    // 락을 획득하지 못했는데, 락을 릴리즈하는 것을 경계해야 한다.
     memberCouponIssueLock.lock(memberId, couponId);
     try {
         return memberCouponIssuer.issue(memberId, couponId);
@@ -64,7 +64,6 @@ private boolean requestLock(Long memberId, Long couponId) {
 #### Lettuce 주의 사항
 
 - 락을 획득하는데 필요한 타임아웃을 직접 구현해야한다.
-- 락을 획득하지 못했는데, 락을 릴리즈하는 것을 경계해야 한다.
 - 스핀락 방식으로 Redis에 부하를 준다.
 
 #### Redisson 분산락

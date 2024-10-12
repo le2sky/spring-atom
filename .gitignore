@@ -39,3 +39,5 @@ out/
 ### Database ###
 **/db
 test-db/
+
+**/.DS_Store

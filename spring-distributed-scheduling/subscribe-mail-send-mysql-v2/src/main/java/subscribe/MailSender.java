@@ -35,11 +35,37 @@ class MailSender {
     }
 
     private int sendAll(Connection connection, List<Subscribe> subscribes, int totalCount) {
-        for (Subscribe subscribe : subscribes) {
-            boolean canSend = distributedLock.tryLock(connection, "schedule" + subscribe.getId(), 0);
+        int batchSize = 10;
+        int nowSize = 1;
+        int index = 0;
+        int loopCount = (int) (Math.ceil(((double) subscribes.size() / batchSize)));
+
+        while (index++ < loopCount) {
+            boolean canSend = distributedLock.tryLock(connection, "schedule-" + nowSize, 0);
             if (canSend) {
-                totalCount = send(totalCount, subscribe);
+                int from = nowSize - 1;
+                int to = from + batchSize;
+                totalCount = sendRangeWithLock(subscribes, from, to, totalCount);
             }
+
+            nowSize += batchSize;
+        }
+
+        return totalCount;
+    }
+
+    private int sendRangeWithLock(List<Subscribe> subscribes, int from, int to, int totalCount) {
+        log.info("{}부터 {}까지 잠금을 수행합니다.", from, to);
+        for (int index = from; index < to; index++) {
+            totalCount = trySend(subscribes, totalCount, index);
+        }
+
+        return totalCount;
+    }
+
+    private int trySend(List<Subscribe> subscribes, int totalCount, int index) {
+        if (index < subscribes.size()) {
+            totalCount = send(totalCount, subscribes.get(index));
         }
 
         return totalCount;
@@ -50,6 +76,7 @@ class MailSender {
             Thread.sleep(100);
         } catch (Exception ignored) {
         }
+
         log.info("{}번 구독자에게 메일을 전송했습니다.", subscribe.getId());
         return totalCount + 1;
     }

@@ -3,6 +3,7 @@ package subscribe;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ class MailSender {
 
     private final SubscribeRepository subscribeRepository;
 
+    @SchedulerLock(name = "subscribe_lock", lockAtLeastFor = "20s", lockAtMostFor = "50s")
     @Scheduled(cron = "0 * * * * *")
     public void sendMail() {
         List<Subscribe> subscribes = subscribeRepository.findAll();

@@ -16,3 +16,8 @@ spring:
   sql:
     init:
       mode: never
+
+subscribe:
+  server:
+    count: ${subscribe.server.count}
+    index: ${subscribe.server.index}

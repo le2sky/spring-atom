@@ -1,0 +1,23 @@
+#### 배치 애플리케이션와 spring batch
+
+- 단발성으로 대용량의 데이터를 처리하는 애플리케이션
+- 단발성으로 큰 데이터를 읽고, 가공하고, 저장하면 서버는 순식간에 CPU, IO 자원을 모두 사용하여 다른 리퀘스트를 처리하기 어렵다.
+- 직접 배치 애플리케이션을 구성하기 위해서 비즈니스 로직 외에 부가 기능을 신경 써야 한다.
+- spring batch는 이를 도운다.
+- 배치 애플리케이션의 조건
+    - 대용량 데이터
+    - 자동화
+    - 견고성
+    - 신뢰성
+    - 성능
+- quartz는 스케줄러의 역할을 수행하고 대용량 데이터 배치 처리에 대한 기능을 지원하지 않음
+- 스케줄마다 quartz가 배치를 실행하는 구조
+
+#### memo
+
+- job : 하나의 배치 작업
+- step : 하나의 job 내부 여러 step
+- tasklet, (reader, processor, writer) : 하나의 step 내부 tasklet, (reader, processor, writer) 묶음이 존재
+- tasklet 하나와 reader, processor, writer 한 묶음이 같은 레벨
+- = reader, processor가 끝나고 tasklet으로 마무리를 못함
+- tasklet은 component, bean과 비슷한 역할

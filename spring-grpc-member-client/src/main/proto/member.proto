@@ -1,0 +1,38 @@
+//.proto 파일은 grpc 및 프로토콜 버퍼를 사용하여 서비스와 메시지 구조를 정의하는 데 사용된다.
+
+syntax = "proto3";
+
+// 컴파일러가 생성한 Java 클래스의 패키지명을 설정한다. 이를 통해 생성된 클래스가 특정 패키지에 포함되도록 한다.
+option java_package = "member.grpc";
+option java_outer_classname = "MemberProto";
+
+service MemberService {
+  rpc CreateMember (MemberRequest) returns (MemberCreateResponse);
+}
+
+// 멤버 생성 요청 객체
+message MemberRequest {
+  int64 id = 1;
+  string email = 2;
+  string password = 3;
+  string name = 4;
+}
+
+// 멤버 생성 응답
+message MemberCreateResponse {
+  int64 id = 1;
+  string email = 2;
+  string password = 3;
+  string name = 4;
+}
+
+/**
+  [프로토콜 버퍼 메시지 필드 식별자의 역할]
+  각 필드에는 번호가 할당되어 있다. 이 필드 번호는 이진형식으로 직렬화될때 필드를 식별하는데 사용되는 번호이다.
+
+  1. 고유 식별 : 유니크해야하며 예약된 필드 번호를 피해야한다. (19000, 19999)
+  2. 효율적인 인코딩 : 필드 번호를 사용하여 데이터를 바이너리 형식으로 인코딩한다. 번호가 작을수록 데이터의 크기가 작아진다.
+    - 필드의 이름을 번호로 저장하니 메시지의 크기가 줄어든다.
+    - 더 자주 사용되는 필드에 작은 번호를 주는 것이 유리하다.
+  3. 변경 가능성 : 필드 번호는 변경하지 않는 한 메시지의 구조를 변경해도 호환성을 유지할 수 있다.
+ */
